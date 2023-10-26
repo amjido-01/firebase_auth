@@ -6,33 +6,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
-import {FcGoogle} from "react-icons/fc"
+import { FcGoogle } from "react-icons/fc";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login, loading, setLoading, signinwithgoogle } = useAuth();
   const navigate = useNavigate();
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
+  const handleFormSubmit = async (values) => {
     setLoading(true);
     console.log(loading);
-    e.preventDefault();
     // Add your login logic here
     try {
-      await login(email, password);
+      await login(values.email, values.password);
       // Redirect or perform other actions after successful login
       navigate("/dashboard");
-      console.log("hi from login page")
+      console.log("hi from login page");
     } catch (error) {
       // Handle login error
       if (error.code === "auth/invalid-login-credentials") {
@@ -45,20 +36,38 @@ const Login = () => {
     console.log(loading);
   };
 
-  const handleGoogleSignIn = async() => {
+  const handleGoogleSignIn = async () => {
     try {
       const user = await signinwithgoogle();
-    // Handle successful sign-in, and possibly navigate or update state.
-    console.log('Google Sign-In Success:', user);
-    navigate('/dashboard');
+      // Handle successful sign-in, and possibly navigate or update state.
+      console.log("Google Sign-In Success:", user);
+      navigate("/dashboard");
     } catch (error) {
       // Handle errors from the signinwithgoogle function
-    console.error('Google Sign-In Error:', error);
-    // Update state or show an error message to the user.
-    setError('An error occurred during Google Sign-In. try again.');
-      
+      console.error("Google Sign-In Error:", error);
+      // Update state or show an error message to the user.
+      setError("An error occurred during Google Sign-In. try again.");
     }
-  }
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .matches(
+          /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+          "Invalid email address"
+        )
+        .required("required"),
+      password: Yup.string()
+        .min(8, "Password must be at least 8 characters")
+        .required("required"),
+    }),
+    onSubmit: handleFormSubmit,
+  });
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -72,7 +81,7 @@ const Login = () => {
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <div className="mb-4">
             <Label htmlFor="email">Email</Label>
 
@@ -80,12 +89,17 @@ const Login = () => {
               type="email"
               id="email"
               name="email"
-              value={email}
-              onChange={handleEmailChange}
-              required
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder="example@gmail.com"
               className="mt-2"
             />
+            {formik.touched.email && formik.errors.email ? (
+              <span className="text-red-400 text-xs ml-3">
+                {formik.errors.email}
+              </span>
+            ) : null}
           </div>
           <div className="mb-4">
             <Label htmlFor="password">Password</Label>
@@ -94,12 +108,17 @@ const Login = () => {
               type="password"
               id="password"
               name="password"
-              value={password}
-              onChange={handlePasswordChange}
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder="*********"
-              required
               className="mt-2"
             />
+            {formik.touched.password && formik.errors.password ? (
+              <span className="text-red-400 text-xs ml-3">
+                {formik.errors.password}
+              </span>
+            ) : null}
           </div>
           <div className="flex items-center justify-end">
             <Button
@@ -113,7 +132,7 @@ const Login = () => {
             </Button>
           </div>
           <div className="mb-4">
-            <Button type="submit" className="w-full mt-1">
+            <Button size="lg" type="submit" className="w-full mt-1">
               Log In
             </Button>
           </div>
@@ -144,11 +163,15 @@ const Login = () => {
         </div>
 
         <div className="">
-        <Button onClick={handleGoogleSignIn} className="w-full text-indigo-500" size="lg" variant="outline">
-          <FcGoogle className="mr-2 h-4 w-4" /> Login with Google
-        </Button>
+          <Button
+            onClick={handleGoogleSignIn}
+            className="w-full text-indigo-500"
+            size="lg"
+            variant="outline"
+          >
+            <FcGoogle className="mr-2 h-4 w-4" /> Login with Google
+          </Button>
         </div>
-
       </div>
     </div>
   );

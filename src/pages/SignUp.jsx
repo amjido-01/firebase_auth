@@ -5,40 +5,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Loader2 } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const SignUp = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const { signup, loading, setLoading, signinwithgoogle } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  // const [loadingState, setLaodingState] = useState(false)
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
+  const handleFormSubmit = async (values) => {
     setLoading(true);
     console.log(loading);
-    e.preventDefault();
-    if (password !== confirmPassword) {
+    if (values.password !== values.confirmPassword) {
       setError("Password and Confirm Password don't match.");
       return;
     }
 
     try {
-      await signup(email, password);
+      await signup(values.email, values.password);
       console.log("created");
       navigate("/dashboard");
       // Redirect or perform other actions after successful login
@@ -75,6 +61,26 @@ const SignUp = () => {
     }
   };
 
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .matches(
+          /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+          "Invalid email address"
+        )
+        .required("required"),
+      password: Yup.string()
+        .min(8, "Password must be at least 8 characters")
+        .required("required"),
+      confirmPassword: Yup.string().required("required"),
+    }),
+    onSubmit: handleFormSubmit,
+  });
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
@@ -86,19 +92,24 @@ const SignUp = () => {
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <div className="mb-4">
             <Label htmlFor="email">Email</Label>
             <Input
               type="email"
               id="email"
               name="email"
-              value={email}
-              onChange={handleEmailChange}
-              required
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder="example@gmail.com"
               className="mt-2"
             />
+            {formik.touched.email && formik.errors.email ? (
+              <span className="text-red-400 text-xs ml-3">
+                {formik.errors.email}
+              </span>
+            ) : null}
           </div>
           <div className="mb-4">
             <Label htmlFor="password">Password</Label>
@@ -106,12 +117,17 @@ const SignUp = () => {
               type="password"
               id="password"
               name="password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               className="mt-2"
               placeholder="*********"
             />
+            {formik.touched.password && formik.errors.password ? (
+              <span className="text-red-400 text-xs ml-3">
+                {formik.errors.password}
+              </span>
+            ) : null}
           </div>
           <div className="mb-4">
             <Label htmlFor="confirmPassword">Confirm Password</Label>
@@ -119,17 +135,29 @@ const SignUp = () => {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
-              value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
+              value={formik.values.confirmPassword}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder="*********"
-              required
               className="mt-2"
             />
+            {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+              <span className="text-red-400 text-xs ml-3">
+                {formik.errors.confirmPassword}
+              </span>
+            ) : null}
           </div>
           <div className="mb-5">
-            <Button type="submit" className="w-full mt-1">
-              Sign Up
-            </Button>
+            {loading ? (
+              <Button size="lg" className="w-full mt-1" disabled>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Sign Up
+              </Button>
+            ) : (
+              <Button size="lg" type="submit" className="w-full mt-1">
+                Sign Up
+              </Button>
+            )}
           </div>
           <div className="flex justify-end items-center">
             <p className="text-primary text-sm font-medium gap-0">
