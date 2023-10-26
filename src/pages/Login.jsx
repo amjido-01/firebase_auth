@@ -32,6 +32,7 @@ const Login = () => {
       await login(email, password);
       // Redirect or perform other actions after successful login
       navigate("/dashboard");
+      console.log("hi from login page")
     } catch (error) {
       // Handle login error
       if (error.code === "auth/invalid-login-credentials") {
@@ -103,8 +104,8 @@ const Login = () => {
           <div className="flex items-center justify-end">
             <Button
               type="button"
-              className=" text-[#e11d48] text-sm font-medium"
-              onClick={() => navigate("/login")}
+              className=" text-indigo-500 text-sm font-medium"
+              onClick={() => navigate("/reset-password")}
               variant="link"
             >
               {" "}
@@ -123,7 +124,7 @@ const Login = () => {
             </p>
             <Button
               type="button"
-              className="px-1 text-[#e11d48]"
+              className="px-1 text-indigo-500"
               onClick={() => navigate("/sign-up")}
               variant="link"
             >
@@ -143,7 +144,7 @@ const Login = () => {
         </div>
 
         <div className="">
-        <Button onClick={handleGoogleSignIn} className="w-full" size="lg" variant="outline">
+        <Button onClick={handleGoogleSignIn} className="w-full text-indigo-500" size="lg" variant="outline">
           <FcGoogle className="mr-2 h-4 w-4" /> Login with Google
         </Button>
         </div>

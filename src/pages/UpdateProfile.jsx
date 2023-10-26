@@ -6,13 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
-import { FcGoogle } from "react-icons/fc";
+import { updateEmail, updatePassword } from "firebase/auth";
 
-const SignUp = () => {
+const UpdateProfile = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { signup, loading, setLoading, signinwithgoogle } = useAuth();
+  const { loading, setLoading, currentUser, updateemail, updatepassword } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
   // const [loadingState, setLaodingState] = useState(false)
@@ -28,7 +28,7 @@ const SignUp = () => {
     setConfirmPassword(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async(e) => {
     setLoading(true);
     console.log(loading);
     e.preventDefault();
@@ -37,48 +37,32 @@ const SignUp = () => {
       return;
     }
 
-    try {
-      await signup(email, password);
-      console.log("created");
-      navigate("/dashboard");
-      // Redirect or perform other actions after successful login
-    } catch (error) {
-      // Handle login error
-      if (error.code === "auth/email-already-in-use") {
-        // Updated error code
-        setError(
-          "Email address is already in use. Please use a different email."
-        );
-        console.log(error.code, "Email already in use");
-      } else if (error.code === "auth/weak-password") {
-        setError("Password should be at least 6");
-      } else {
-        setError("An error occurred. Please try again later.");
-        console.log(error);
-      }
-    }
-    setLoading(false);
-    console.log(loading);
-  };
+    const promises = [];
 
-  const handleGoogleSignUp = async () => {
-    try {
-      const user = await signinwithgoogle();
-      // Handle successful sign-in, and possibly navigate or update state.
-      console.log("Google Sign-In Success:", user);
-      navigate("/dashboard");
-    } catch (error) {
-      // Handle errors from the signinwithgoogle function
-      // console.error('Google Sign-In Error:', error);
-      // Update state or show an error message to the user.
-      setError("An error occurred during Google Sign-In. try again.");
+    if (email) {
+      promises.push(updateemail(email)); // Call the updateemail function
     }
-  };
+
+    if (password) {
+      promises.push(updatepassword(password)); // Call the updatepassword function
+    }
+
+    try {
+        await Promise.all(promises);
+        navigate("/dashboard");
+      } catch (error) {
+        console.error('Error updating profile:', error);
+        setError('An error occurred while updating the profile. Please try again.');
+      }
+  
+      setLoading(false);
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-semibold text-primary mb-4">Sign Up</h2>
+        <h2 className="text-2xl font-semibold text-primary mb-4">Update Profile</h2>
         {error && (
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
@@ -96,7 +80,7 @@ const SignUp = () => {
               value={email}
               onChange={handleEmailChange}
               required
-              placeholder="example@gmail.com"
+              placeholder={currentUser.email}
               className="mt-2"
             />
           </div>
@@ -108,9 +92,8 @@ const SignUp = () => {
               name="password"
               value={password}
               onChange={handlePasswordChange}
-              required
+              placeholder="Leave blank to keep the same"
               className="mt-2"
-              placeholder="*********"
             />
           </div>
           <div className="mb-4">
@@ -121,14 +104,13 @@ const SignUp = () => {
               name="confirmPassword"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
-              placeholder="*********"
-              required
+              placeholder="Leave blank to keep the same"
               className="mt-2"
             />
           </div>
           <div className="mb-5">
             <Button type="submit" className="w-full mt-1">
-              Sign Up
+             Update
             </Button>
           </div>
           <div className="flex justify-end items-center">
@@ -136,39 +118,20 @@ const SignUp = () => {
               Alrady have an Account?
             </p>
             <Button
-              type="button"
+            type="button"
               className="px-1 text-indigo-500"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/dashboard")}
               variant="link"
             >
               {" "}
-              Sign In
+              Cancel
             </Button>
           </div>
         </form>
-        <div className="flex gap-3 justify-center items-center my-4">
-          <span className="w-[45%] border-b border-primary"></span>
-
-          <span className="text-center text-sm font-medium text-primary lowercase">
-            Or
-          </span>
-
-          <span className="w-[45%] border-b border-primary"></span>
-        </div>
-
-        <div className="">
-          <Button
-            onClick={handleGoogleSignUp}
-            className="w-full text-indigo-500"
-            size="lg"
-            variant="outline"
-          >
-            <FcGoogle className="mr-2 h-4 w-4" /> Sign Up with Google
-          </Button>
-        </div>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default UpdateProfile;
+

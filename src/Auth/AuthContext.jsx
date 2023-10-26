@@ -1,6 +1,6 @@
 import { auth } from "../firebase";
 import { useContext, createContext, useState, useEffect } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup  } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, updateEmail, updatePassword, sendEmailVerification  } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -61,6 +61,33 @@ const signout = () => {
     signOut(auth)
 }
 
+const resetpassword = (email) => {
+  return sendPasswordResetEmail(auth, email)
+}
+
+const updateemail = (newEmail) => {
+  updateEmail(currentUser, newEmail).then(()=> {
+    console.log("email updated")
+  }).catch((error) => {
+    // Handle error if the password update fails.
+    console.error('Error updating password:', error);
+    throw error; // You can re-throw the error to handle it in the component that calls this function.
+  })
+}
+const updatepassword = (newPassword) => {
+  const user = auth.currentUser;
+
+  return user
+    .updatePassword(newPassword)
+    .then(() => {
+      // Password updated successfully.
+    })
+    .catch((error) => {
+      // Handle error if the password update fails.
+      console.error('Error updating password:', error);
+      throw error; // You can re-throw the error to handle it in the component that calls this function.
+    });
+}
 
   const value = {
     currentUser,
@@ -69,7 +96,10 @@ const signout = () => {
     signinwithgoogle,
     signout,
     setLoading,
-    loading
+    loading,
+    resetpassword,
+    updateemail,
+    updatepassword
   };
   return <AuthContext.Provider value={value}>{ children}</AuthContext.Provider>;
 };

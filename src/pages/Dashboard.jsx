@@ -42,7 +42,7 @@ const Dashboard = () => {
             <p>Card Content</p>
           </CardContent>
           <CardFooter className="flex justify-end items-center">
-            <Button className="w-full">Update Profile</Button>
+            <Button onClick={() => navigate("/update-profile")} className="w-full">Update Profile</Button>
           </CardFooter>
         </Card>
         <div className="flex justify-center mt-4 items-center">
