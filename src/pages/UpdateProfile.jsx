@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
-import { updateEmail, updatePassword } from "firebase/auth";
+// import { updateEmail, updatePassword } from "firebase/auth";
 
 const UpdateProfile = () => {
   const [email, setEmail] = useState("");
@@ -60,7 +60,7 @@ const UpdateProfile = () => {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex pt-20 items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold text-primary mb-4">Update Profile</h2>
         {error && (

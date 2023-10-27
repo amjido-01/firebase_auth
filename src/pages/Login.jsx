@@ -9,6 +9,7 @@ import { AlertCircle } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Loader2 } from "lucide-react";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -16,8 +17,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit = async (values) => {
-    setLoading(true);
-    console.log(loading);
+    setLoading(true)
     // Add your login logic here
     try {
       await login(values.email, values.password);
@@ -31,9 +31,10 @@ const Login = () => {
       } else {
         setError("An error occurred, try again!");
       }
+    }finally {
+      setLoading(false); // Set loading to false after login attempt
+      console.log(loading); // Check the value of loading
     }
-    setLoading(false);
-    console.log(loading);
   };
 
   const handleGoogleSignIn = async () => {
@@ -70,7 +71,7 @@ const Login = () => {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex pt-20 items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold text-primary mb-4">Login</h2>
 
@@ -132,14 +133,21 @@ const Login = () => {
             </Button>
           </div>
           <div className="mb-4">
-            <Button size="lg" type="submit" className="w-full mt-1">
-              Log In
-            </Button>
+            {loading ? (
+              <Button size="lg" className="w-full mt-1" disabled>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Log in
+              </Button>
+            ) : (
+              <Button size="lg" type="submit" className="w-full mt-1">
+                Log In
+              </Button>
+            )}
           </div>
 
           <div className="flex justify-end items-center">
             <p className="text-primary text-sm font-medium gap-0">
-              Don't have an Account?
+              {` Don't have an Account?`}
             </p>
             <Button
               type="button"

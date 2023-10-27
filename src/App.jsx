@@ -8,11 +8,14 @@ import { AuthProvider } from "./Auth/AuthContext";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 import UpdateProfile from "./pages/UpdateProfile";
 import ResetPassword from "./pages/ResetPassword";
+import { Header } from "./components/ui/Header";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <div className="h-screen">
+        <Header />
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/sign-up" element={<SignUp />} />
@@ -27,6 +30,7 @@ function App() {
             <Route exact path="/dashboard" element={<Dashboard />} />
           </Route>
         </Routes>
+        </div>
       </AuthProvider>
     </BrowserRouter>
   );

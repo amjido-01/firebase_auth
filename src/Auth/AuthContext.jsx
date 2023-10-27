@@ -1,6 +1,17 @@
 import { auth } from "../firebase";
 import { useContext, createContext, useState, useEffect } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, updateEmail, updatePassword, sendEmailVerification  } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  sendPasswordResetEmail,
+  updateEmail,
+  updatePassword,
+  sendEmailVerification,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -13,81 +24,91 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      setLoading(false);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user);
+        setLoading(false);
+        console.log(user, "from authcontext");
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        setCurrentUser(null);
+        console.log("no user");
+        setLoading(false);
+      }
     });
-
-    return unsubscribe;
   }, []);
 
- const signup = ( email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password)
- };
+  const signup = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
- const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
- }
+  const login = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
- const signinwithgoogle = async() => {
-  const provider = new GoogleAuthProvider();
+  const signinwithgoogle = async () => {
+    const provider = new GoogleAuthProvider();
 
-  try {
-    const result = await signInWithPopup(auth, provider);
-    // This code block from the Firebase documentation can be used here
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
+    try {
+      const result = await signInWithPopup(auth, provider);
+      // This code block from the Firebase documentation can be used here
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+      // IdP data available using getAdditionalUserInfo(result)
+      // ...
 
-    // You can return the user object or any relevant data here if needed
-    return user;
-  } catch (error) {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
+      // You can return the user object or any relevant data here if needed
+      return user;
+    } catch (error) {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
 
-    // You can throw the error to handle it in your Login component
-    throw error;
-  }
- }
+      // You can throw the error to handle it in your Login component
+      throw error;
+    }
+  };
 
-const signout = () => {
-    signOut(auth)
-}
+  const signout = () => {
+    signOut(auth);
+  };
 
-const resetpassword = (email) => {
-  return sendPasswordResetEmail(auth, email)
-}
+  const resetpassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
 
-const updateemail = (newEmail) => {
-  updateEmail(currentUser, newEmail).then(()=> {
-    console.log("email updated")
-  }).catch((error) => {
-    // Handle error if the password update fails.
-    console.error('Error updating password:', error);
-    throw error; // You can re-throw the error to handle it in the component that calls this function.
-  })
-}
-const updatepassword = (newPassword) => {
-  const user = auth.currentUser;
+  const updateemail = (newEmail) => {
+    updateEmail(currentUser, newEmail)
+      .then(() => {
+        console.log("email updated");
+      })
+      .catch((error) => {
+        // Handle error if the password update fails.
+        console.error("Error updating password:", error);
+        throw error; // You can re-throw the error to handle it in the component that calls this function.
+      });
+  };
+  const updatepassword = (newPassword) => {
+    const user = auth.currentUser;
 
-  return user
-    .updatePassword(newPassword)
-    .then(() => {
-      // Password updated successfully.
-    })
-    .catch((error) => {
-      // Handle error if the password update fails.
-      console.error('Error updating password:', error);
-      throw error; // You can re-throw the error to handle it in the component that calls this function.
-    });
-}
+    return user
+      .updatePassword(newPassword)
+      .then(() => {
+        // Password updated successfully.
+      })
+      .catch((error) => {
+        // Handle error if the password update fails.
+        console.error("Error updating password:", error);
+        throw error; // You can re-throw the error to handle it in the component that calls this function.
+      });
+  };
 
   const value = {
     currentUser,
@@ -99,7 +120,7 @@ const updatepassword = (newPassword) => {
     loading,
     resetpassword,
     updateemail,
-    updatepassword
+    updatepassword,
   };
-  return <AuthContext.Provider value={value}>{ children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

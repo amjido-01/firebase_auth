@@ -42,9 +42,10 @@ const SignUp = () => {
         setError("An error occurred. Please try again later.");
         console.log(error);
       }
+    }finally {
+      setLoading(false); // Set loading to false after login attempt
+      console.log(loading); // Check the value of loading
     }
-    setLoading(false);
-    console.log(loading);
   };
 
   const handleGoogleSignUp = async () => {
@@ -82,7 +83,7 @@ const SignUp = () => {
     onSubmit: handleFormSubmit,
   });
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center pt-24 justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold text-primary mb-4">Sign Up</h2>
         {error && (
