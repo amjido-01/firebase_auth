@@ -71,7 +71,7 @@ const Login = () => {
   });
 
   return (
-    <div className="min-h-screen flex pt-20 items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex pt-[4.2rem] items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold text-primary mb-4">Login</h2>
 
@@ -97,9 +97,9 @@ const Login = () => {
               className="mt-2"
             />
             {formik.touched.email && formik.errors.email ? (
-              <span className="text-red-400 text-xs ml-3">
+              <p className="text-red-400 h-4 pt-1 italic text-[12px]">
                 {formik.errors.email}
-              </span>
+              </p>
             ) : null}
           </div>
           <div className="mb-4">
@@ -116,9 +116,9 @@ const Login = () => {
               className="mt-2"
             />
             {formik.touched.password && formik.errors.password ? (
-              <span className="text-red-400 text-xs ml-3">
+              <p className="text-red-400 pt-1 h-4 text-[12px] italic">
                 {formik.errors.password}
-              </span>
+              </p>
             ) : null}
           </div>
           <div className="flex items-center justify-end">

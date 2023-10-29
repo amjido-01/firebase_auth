@@ -83,7 +83,7 @@ const SignUp = () => {
     onSubmit: handleFormSubmit,
   });
   return (
-    <div className="min-h-screen flex items-center pt-24 justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center pt-[4.2rem] justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold text-primary mb-4">Sign Up</h2>
         {error && (
@@ -107,9 +107,9 @@ const SignUp = () => {
               className="mt-2"
             />
             {formik.touched.email && formik.errors.email ? (
-              <span className="text-red-400 text-xs ml-3">
+              <p className="text-red-400 h-4 pt-1 italic text-[12px]">
                 {formik.errors.email}
-              </span>
+              </p>
             ) : null}
           </div>
           <div className="mb-4">
@@ -125,9 +125,9 @@ const SignUp = () => {
               placeholder="*********"
             />
             {formik.touched.password && formik.errors.password ? (
-              <span className="text-red-400 text-xs ml-3">
+              <p className="text-red-400 h-4 pt-1 italic text-[12px]">
                 {formik.errors.password}
-              </span>
+              </p>
             ) : null}
           </div>
           <div className="mb-4">
@@ -143,9 +143,9 @@ const SignUp = () => {
               className="mt-2"
             />
             {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-              <span className="text-red-400 text-xs ml-3">
+              <p className="text-red-400 h-4 pt-1 italic text-[12px]">
                 {formik.errors.confirmPassword}
-              </span>
+              </p>
             ) : null}
           </div>
           <div className="mb-5">
