@@ -60,8 +60,8 @@ const UpdateProfile = () => {
 
 
   return (
-    <div className="min-h-screen flex pt-20 items-center justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <div className="min-h-screen flex pt-20 items-center justify-center">
+      <div className="p-8 border-[1px] rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold text-primary mb-4">Update Profile</h2>
         {error && (
           <Alert variant="destructive">

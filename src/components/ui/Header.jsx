@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
-import { RiMenu3Line } from 'react-icons/ri';
-import { RiCloseCircleFill } from 'react-icons/ri';
-import { NavLink, Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import logo from "../../assets/react.svg"
-import {Button} from "../ui/button"
+import { useState, useEffect, useRef } from "react";
+import { RiMenu3Line } from "react-icons/ri";
+import { RiCloseCircleFill } from "react-icons/ri";
+import { NavLink, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import logo from "../../assets/react.svg";
+import { Button } from "../ui/button";
+import { ModeToggle } from "./mode-toggle";
 export const Header = () => {
   const [active, setActive] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,28 +26,28 @@ export const Header = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
 
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [menuRef]);
 
   // active page indicator
   const navLinkStyle = ({ isActive }) => {
     return {
-      textDecoration: isActive ? 'underline' : 'none',
-      textDecorationColor: isActive ? '#31af31' : 'none',
-      textDecorationThickness: isActive ? '2px' : '0px',
-      textUnderlineOffset: isActive ? '0.3em' : 'none',
-      color: isActive ? '#31af31' : '',
+      textDecoration: isActive ? "underline" : "none",
+      textDecorationColor: isActive ? "#31af31" : "none",
+      textDecorationThickness: isActive ? "2px" : "0px",
+      textUnderlineOffset: isActive ? "0.3em" : "none",
+      color: isActive ? "#31af31" : "",
     };
   };
 
   return (
     <section
-      className={`header bg-white fixed px-2 sm:px-4 py-2 md:py-2.5 z-20 top-0 left-0 shadow-md w-full flex items-center justify-between ${
-        active ? 'blur-active' : ''
+      className={`header fixed px-2 bg-white dark:bg-[#020617] border-b-[1px] sm:px-4 py-2 md:py-2.5 z-20 top-0 left-0 shadow-md w-full flex items-center justify-between ${
+        active ? "blur-active" : ""
       }`}
     >
       <div className="wrapper w-[80%] mx-auto flex items-center justify-between">
@@ -57,7 +58,10 @@ export const Header = () => {
 
           <div className="flex justify-between">
             <div className="">
-              <NavLink to="/" className="site-title flex items-center text-[1.125rem] md:text-[24px] font-bold leading-normal poppins">
+              <NavLink
+                to="/"
+                className="site-title flex items-center text-[1.125rem] md:text-[24px] font-bold leading-normal poppins"
+              >
                 <img
                   className="w-[8rem] h-[2rem] md:w-[9.42544rem] md:h-[2.5625rem]"
                   src={logo}
@@ -70,23 +74,19 @@ export const Header = () => {
 
         <div className="login-button-container flex justify-between items-center">
           <div className={` flex items-center gap-10 justify-between`}>
-            <ul className="hidden text-[#000000] lg:flex gap-8 md:items-center leading-normal items-center text-[0.875rem]">
+            <ul className="hidden text-primary lg:flex gap-8 md:items-center leading-normal items-center text-[0.875rem]">
               <li className="poppins font-normal text-style under text-[1.125rem] leading-normal">
-                <Link to="/">
-                  Home
-                </Link>
+                <Link to="/">Home</Link>
               </li>
               <li className="roboto font-normal text-style under text-[1.125rem] leading-normal">
-                <Link >
-                  About us
-                </Link>
+                <Link>About us</Link>
               </li>
-              
-              
             </ul>
 
             <div className="flex items-center gap-[6px] sm:gap-3">
               <Button onClick={() => navigate("login")}>Log In </Button>
+
+              <ModeToggle />
             </div>
           </div>
 
@@ -96,7 +96,7 @@ export const Header = () => {
         <ul
           ref={menuRef}
           className={`mobile-menu ${
-            active ? 'w-[70%]' : 'w-0'
+            active ? "w-[70%]" : "w-0"
           } h-screen overflow-hidden transition-all duration-300 ease-in-out z-10 absolute top-0 left-0 bg-[#f1eeee] lg:hidden`}
         >
           {active && (

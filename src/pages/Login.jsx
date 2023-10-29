@@ -71,8 +71,8 @@ const Login = () => {
   });
 
   return (
-    <div className="min-h-screen flex pt-[4.2rem] items-center justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <div className="min-h-screen flex pt-[4.2rem] items-center justify-center">
+      <div className="border-[1px] p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold text-primary mb-4">Login</h2>
 
         {error && (
@@ -94,7 +94,7 @@ const Login = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="example@gmail.com"
-              className="mt-2"
+              className="mt-2 "
             />
             {formik.touched.email && formik.errors.email ? (
               <p className="text-red-400 h-4 pt-1 italic text-[12px]">
@@ -151,7 +151,7 @@ const Login = () => {
             </p>
             <Button
               type="button"
-              className="px-1 text-indigo-500"
+              className="px-1 text-black dark:text-white"
               onClick={() => navigate("/sign-up")}
               variant="link"
             >
@@ -173,7 +173,7 @@ const Login = () => {
         <div className="">
           <Button
             onClick={handleGoogleSignIn}
-            className="w-full text-indigo-500"
+            className="w-full text-black dark:text-white"
             size="lg"
             variant="outline"
           >

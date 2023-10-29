@@ -42,7 +42,7 @@ const SignUp = () => {
         setError("An error occurred. Please try again later.");
         console.log(error);
       }
-    }finally {
+    } finally {
       setLoading(false); // Set loading to false after login attempt
       console.log(loading); // Check the value of loading
     }
@@ -83,8 +83,8 @@ const SignUp = () => {
     onSubmit: handleFormSubmit,
   });
   return (
-    <div className="min-h-screen flex items-center pt-[4.2rem] justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <div className="min-h-screen flex items-center pt-[4.2rem] justify-center">
+      <div className="p-8 rounded-lg border-[1px]  shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold text-primary mb-4">Sign Up</h2>
         {error && (
           <Alert variant="destructive">
@@ -166,7 +166,7 @@ const SignUp = () => {
             </p>
             <Button
               type="button"
-              className="px-1 text-indigo-500"
+              className="px-1 text-black dark:text-white"
               onClick={() => navigate("/login")}
               variant="link"
             >
@@ -188,7 +188,7 @@ const SignUp = () => {
         <div className="">
           <Button
             onClick={handleGoogleSignUp}
-            className="w-full text-indigo-500"
+            className="w-full text-black dark:text-white"
             size="lg"
             variant="outline"
           >
