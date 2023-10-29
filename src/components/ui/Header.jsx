@@ -6,11 +6,15 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../assets/react.svg";
 import { Button } from "../ui/button";
 import { ModeToggle } from "./mode-toggle";
+import { useAuth } from "../../Auth/AuthContext";
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import { ProfileButton } from "./ProfileButton";
 export const Header = () => {
   const [active, setActive] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef();
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
   // sidebar toggle function
   const handleNavbar = () => {
@@ -84,7 +88,13 @@ export const Header = () => {
             </ul>
 
             <div className="flex items-center gap-[6px] sm:gap-3">
-              <Button onClick={() => navigate("login")}>Log In </Button>
+              {currentUser ? (
+                <div>
+                 <ProfileButton />
+                </div>
+              ) : (
+                <Button onClick={() => navigate("login")}>Log In </Button>
+              )}
 
               <ModeToggle />
             </div>
