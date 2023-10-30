@@ -7,7 +7,7 @@ import logo from "../../assets/react.svg";
 import { Button } from "../ui/button";
 import { ModeToggle } from "./mode-toggle";
 import { useAuth } from "../../Auth/AuthContext";
-import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+// import { ProfileButton } from "./ProfileButton";
 import { ProfileButton } from "./ProfileButton";
 export const Header = () => {
   const [active, setActive] = useState(false);

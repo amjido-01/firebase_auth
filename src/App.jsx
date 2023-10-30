@@ -6,7 +6,6 @@ import SignUp from "./pages/SignUp";
 import { Landing } from "./pages/Landing";
 import { AuthProvider } from "./Auth/AuthContext";
 import { ProtectedRoutes } from "./ProtectedRoutes";
-import UpdateProfile from "./pages/UpdateProfile";
 import ResetPassword from "./pages/ResetPassword";
 import { Header } from "./components/ui/Header";
 import {ThemeProvider } from "./components/ui/theme-provider"
@@ -25,10 +24,6 @@ function App() {
               <Route path="/about-us" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/reset-password" element={<ResetPassword />} />
-
-              <Route path="/update-profile" element={<ProtectedRoutes />}>
-                <Route path="/update-profile" element={<UpdateProfile />} />
-              </Route>
 
               <Route exact path="/dashboard" element={<ProtectedRoutes />}>
                 <Route exact path="/dashboard" element={<Dashboard />} />

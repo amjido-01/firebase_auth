@@ -11,6 +11,9 @@ import {
   updatePassword,
   sendEmailVerification,
   onAuthStateChanged,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+  EmailAuthCredential
 } from "firebase/auth";
 
 const AuthContext = createContext();
@@ -95,13 +98,16 @@ export const AuthProvider = ({ children }) => {
         throw error; // You can re-throw the error to handle it in the component that calls this function.
       });
   };
-  const updatepassword = (newPassword) => {
-    const user = auth.currentUser;
 
-    return user
-      .updatePassword(newPassword)
+  const updatepassword = () => {
+    const user = auth.currentUser;
+    const credential = EmailAuthProvider.credential(user.email, user.password)
+    console.log(EmailAuthProvider.credential(user.email ,"see"))
+
+      reauthenticateWithCredential(currentUser, credential)
       .then(() => {
         // Password updated successfully.
+        console.log("password changed");
       })
       .catch((error) => {
         // Handle error if the password update fails.
