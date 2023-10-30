@@ -1,5 +1,5 @@
-import { Logout } from "./LogOut";
-import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import { Logout } from "./Logout";
+import { Avatar, AvatarImage } from "./avatar";
 import { useAuth } from "../../Auth/AuthContext";
 import {
   CreditCard,
