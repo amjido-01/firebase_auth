@@ -107,7 +107,7 @@ export const AuthProvider = ({ children }) => {
       reauthenticateWithCredential(currentUser, credential)
       .then(() => {
         // Password updated successfully.
-        console.log("password changed");
+        console.log("password changed!");
       })
       .catch((error) => {
         // Handle error if the password update fails.
