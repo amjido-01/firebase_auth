@@ -1,13 +1,7 @@
 import { Logout } from "./Logout";
 import { Avatar, AvatarImage } from "./avatar";
 import { useAuth } from "../../Auth/AuthContext";
-import {
-  CreditCard,
-  Keyboard,
-  LifeBuoy,
-  Settings,
-  User,
-} from "lucide-react";
+import { CreditCard, Keyboard, LifeBuoy, Settings, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,6 +12,8 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "./dropdown-menu";
+import { EditProfile } from "./EditProfile";
+
 export function ProfileButton() {
   const { currentUser, loading } = useAuth();
   return (

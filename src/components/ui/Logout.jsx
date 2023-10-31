@@ -9,6 +9,7 @@ import {
 } from "./dropdown-menu";
 import { useAuth } from "../../Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { EditProfile } from "./EditProfile";
 export const Logout = () => {
     const {signout,currentUser} = useAuth();
     const navigate = useNavigate()
@@ -35,13 +36,17 @@ export const Logout = () => {
       <DropdownMenuPortal>
         <DropdownMenuSubContent>
           <DropdownMenuItem>
-            <button className=" hover:no-underline cursor-auto text-black dark:text-white" onClick={handleSignOut}>
+            <button
+              className=" hover:no-underline cursor-auto text-black dark:text-white"
+              onClick={handleSignOut}
+            >
               {currentUser?.email}
             </button>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <span>Log out of all accounts</span>
+            {/* <span>Log out of all accounts</span> */}
+            <EditProfile />
           </DropdownMenuItem>
         </DropdownMenuSubContent>
       </DropdownMenuPortal>
