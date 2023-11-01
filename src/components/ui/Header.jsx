@@ -54,20 +54,17 @@ export const Header = () => {
         active ? "blur-active" : ""
       }`}
     >
-      <div className="wrapper w-[80%] mx-auto flex items-center justify-between">
-        <div className="mobile-nav-container lg:justify-between md:justify-start flex gap-2 sm:gap-4 items-center">
+      <div className="wrapper w-[95%] md:w-[80%] mx-auto flex items-center justify-between">
+        <div className="mobile-nav-container gap-2 flex items-center">
           <div className="mobile-menu-icon lg:hidden" onClick={handleNavbar}>
             <RiMenu3Line className="text-[24px] menu-icon-svg lg:hidden lg:absolute" />
           </div>
 
-          <div className="flex justify-between">
+          <div className="">
             <div className="">
-              <NavLink
-                to="/"
-                className="site-title flex items-center text-[1.125rem] md:text-[24px] font-bold leading-normal poppins"
-              >
+              <NavLink to="/" className="site-title flex items-center">
                 <img
-                  className="w-[8rem] h-[2rem] md:w-[9.42544rem] md:h-[2.5625rem]"
+                  className="md:w-10 md:h-10"
                   src={logo}
                   alt="logo"
                 />
@@ -90,7 +87,7 @@ export const Header = () => {
             <div className="flex items-center gap-[6px] sm:gap-3">
               {currentUser ? (
                 <div>
-                 <ProfileButton />
+                  <ProfileButton />
                 </div>
               ) : (
                 <Button onClick={() => navigate("login")}>Log In </Button>
@@ -106,13 +103,13 @@ export const Header = () => {
         <ul
           ref={menuRef}
           className={`mobile-menu ${
-            active ? "w-[70%]" : "w-0"
-          } h-screen overflow-hidden transition-all duration-300 ease-in-out z-10 absolute top-0 left-0 bg-[#f1eeee] lg:hidden`}
+            active ? "w-[85%]" : "w-0"
+          } h-screen overflow-hidden transition-all duration-300 ease-in-out z-10 absolute top-0 left-0 bg-white dark:bg-[#020617] lg:hidden`}
         >
           {active && (
             <RiCloseCircleFill
               onClick={handleNavbar}
-              className="close mt-7 right-4 cursor-pointer font-medium text-[40px] leading-5 not-italic absolute"
+              className="close mt-7  right-4 cursor-pointer font-medium text-[40px] leading-5 not-italic absolute"
             />
           )}
           <ul className="p-4 mt-20 w-[80%] ml-8">
@@ -140,9 +137,6 @@ export const Header = () => {
             </li>
             {/* Add other links here */}
           </ul>
-          <div className="flex justify-end">
-            <Button>click</Button>
-          </div>
         </ul>
       </div>
     </section>

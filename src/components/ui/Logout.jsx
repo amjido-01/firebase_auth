@@ -46,6 +46,7 @@ export const Logout = () => {
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             {/* <span>Log out of all accounts</span> */}
+            {/* editprofile that drigger the dialog */}
             <EditProfile />
           </DropdownMenuItem>
         </DropdownMenuSubContent>

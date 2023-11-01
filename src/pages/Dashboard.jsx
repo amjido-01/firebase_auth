@@ -15,27 +15,26 @@ const Dashboard = () => {
   console.log(currentUser);
 
   return (
-    <div className="h-screen flex items-center justify-center">
-      <div>
-        <Card className="w-[380px]">
-          <CardHeader>
-            <CardTitle>Profile</CardTitle>
-            <CardDescription>
-              {currentUser && currentUser.email}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p>Card Content</p>
-          </CardContent>
-          <CardFooter className="">
-            <div className="w-full">
-              <EditProfile className="w-full" />
-            </div>
-          </CardFooter>
-        </Card>
-        
+    <div className="min-h-screen mx-auto px-8 flex items-center justify-center">
+        <div className="px- border-2 border-red-500">
+          <Card className="w-[330px] md:w-[380px]">
+            <CardHeader>
+              <CardTitle>Profile</CardTitle>
+              <CardDescription>
+                {currentUser && currentUser.email}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Card Content</p>
+            </CardContent>
+            <CardFooter className="">
+              <div className="w-full">
+                <EditProfile className="w-full" />
+              </div>
+            </CardFooter>
+          </Card>
+        </div>
       </div>
-    </div>
   );
 };
 
