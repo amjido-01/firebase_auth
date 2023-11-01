@@ -71,7 +71,7 @@ const Login = () => {
   });
 
   return (
-    <div className="min-h-screen px-8 flex pt-[4.2rem] items-center justify-center">
+    <div className="min-h-screen px-2 md:px-8 flex pt-[4.2rem] items-center justify-center">
       <div className="border-[1px] p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold text-primary mb-4">Login</h2>
 

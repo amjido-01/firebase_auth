@@ -17,23 +17,23 @@ export const Landing = () => {
     const path = currentUser ? "/about-us" : "login";
   console.log(currentUser,"from home");
   return (
-    <div className="pt-20 h-screen flex items-center justify-center">
-      <Card className="w-[380px]">
-        <CardHeader>
-          <CardTitle>My App</CardTitle>
-          <CardDescription>It is simple and easy to us!</CardDescription>
-        </CardHeader>
+    <div className="pt-20 min-h-screen flex items-center justify-center px-8">
+      <div>
+        <Card className="w-[370px] md:w-[380px]">
+          <CardHeader>
+            <CardTitle>My App</CardTitle>
+            <CardDescription>It is simple and easy to us!</CardDescription>
+          </CardHeader>
 
-        <CardContent>
-        
+          <CardContent>
             <Button onClick={() => navigate(path)}>{value}</Button>
-          
-        </CardContent>
+          </CardContent>
 
-        <CardFooter>
-          <p>Copyright &#169; 2023</p>
-        </CardFooter>
-      </Card>
+          <CardFooter>
+            <p>Copyright &#169; 2023</p>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   );
 };
