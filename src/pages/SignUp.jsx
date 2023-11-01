@@ -83,7 +83,7 @@ const SignUp = () => {
     onSubmit: handleFormSubmit,
   });
   return (
-    <div className="min-h-screen flex items-center px-8 pt-[4.2rem] justify-center">
+    <div className="min-h-screen flex items-center px-2 md:px-8 pt-[4.2rem] justify-center">
       <div className="p-8 rounded-lg border-[1px]  shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold text-primary mb-4">Sign Up</h2>
         {error && (
