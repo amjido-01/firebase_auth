@@ -19,7 +19,7 @@ export const Landing = () => {
   return (
     <div className="pt-20 min-h-screen flex items-center justify-center px-8">
       <div>
-        <Card className="w-[370px] md:w-[380px]">
+        <Card className="w-[340px] sm:w-[370px] md:w-[380px]">
           <CardHeader>
             <CardTitle>My App</CardTitle>
             <CardDescription>It is simple and easy to us!</CardDescription>
