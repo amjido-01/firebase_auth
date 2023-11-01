@@ -30,9 +30,7 @@ const Dashboard = () => {
             </CardFooter>
           </Card>
         </div>
-
       </div>
-    </div>
   );
 };
 
