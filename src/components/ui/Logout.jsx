@@ -1,4 +1,4 @@
-import { LogOut } from "lucide-react";
+import { LogOut, Pencil } from "lucide-react";
 import {
   DropdownMenuSub,
   DropdownMenuSubTrigger,
@@ -9,10 +9,15 @@ import {
 } from "./dropdown-menu";
 import { useAuth } from "../../Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { EditProfile } from "./EditProfile";
+import { useModal } from "../../hooks/use-modal-hook"
+import { Button } from "./button";
+
+
 export const Logout = () => {
     const {signout,currentUser} = useAuth();
     const navigate = useNavigate()
+
+    const { onOpen } = useModal();
 
    const handleSignOut = async () => {
      // setLoading(true)
@@ -27,6 +32,7 @@ export const Logout = () => {
      }
      // setLoading(false)
    };
+
   return (
     <DropdownMenuSub>
       <DropdownMenuSubTrigger>
@@ -45,9 +51,10 @@ export const Logout = () => {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            {/* <span>Log out of all accounts</span> */}
-            {/* editprofile that drigger the dialog */}
-            <EditProfile />
+              <Button onClick={() => onOpen("updateProfileModal")}>
+                Update Profile
+                <Pencil className="ml-auto"/>
+              </Button>
           </DropdownMenuItem>
         </DropdownMenuSubContent>
       </DropdownMenuPortal>

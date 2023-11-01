@@ -12,7 +12,6 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "./dropdown-menu";
-import { EditProfile } from "./EditProfile";
 
 export function ProfileButton() {
   const { currentUser, loading } = useAuth();
