@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { RiMenu3Line } from "react-icons/ri";
 import { RiCloseCircleFill } from "react-icons/ri";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/react.svg";
 import { Button } from "../ui/button";
@@ -62,24 +62,21 @@ export const Header = () => {
 
           <div className="">
             <div className="">
-              <NavLink to="/" className="site-title flex items-center">
-                <img
-                  className="md:w-10 md:h-10"
-                  src={logo}
-                  alt="logo"
-                />
-              </NavLink>
+              <Link to="/" className="site-title flex items-center">
+                {/* <img className="md:w-10 md:h-10" src={logo} alt="logo" /> */}
+                <span> ME </span>
+              </Link>
             </div>
           </div>
         </div>
 
         <div className="login-button-container flex justify-between items-center">
           <div className={` flex items-center gap-10 justify-between`}>
-            <ul className="hidden text-primary lg:flex gap-8 md:items-center leading-normal items-center text-[0.875rem]">
-              <li className="poppins font-normal text-style under text-[1.125rem] leading-normal">
+            <ul className="hidden text-black dark:text-white lg:flex gap-8 md:items-center leading-normal items-center text-[0.875rem]">
+              <li className="font-normal text-style under text-[1.125rem] leading-normal">
                 <Link to="/">Home</Link>
               </li>
-              <li className="roboto font-normal text-style under text-[1.125rem] leading-normal">
+              <li className="font-normal text-style under text-[1.125rem] leading-normal">
                 <Link>About us</Link>
               </li>
             </ul>
@@ -114,7 +111,7 @@ export const Header = () => {
           )}
           <ul className="p-4 mt-20 w-[80%] ml-8">
             <li className="mb-5 text-[25px] font-medium leading-[120%] hover:underline">
-              <NavLink
+              <Link
                 to="/"
                 onClick={() => {
                   setActive(false);
@@ -122,10 +119,10 @@ export const Header = () => {
                 className=""
               >
                 Home
-              </NavLink>
+              </Link>
             </li>
             <li className="mb-5 text-[25px] font-medium leading-[120%] hover:underline">
-              <NavLink
+              <Link
                 to="/about-us"
                 onClick={() => {
                   setActive(false);
@@ -133,7 +130,7 @@ export const Header = () => {
                 className=""
               >
                 About
-              </NavLink>
+              </Link>
             </li>
             {/* Add other links here */}
           </ul>

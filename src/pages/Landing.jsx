@@ -26,7 +26,7 @@ export const Landing = () => {
           </CardHeader>
 
           <CardContent>
-            <Button onClick={() => navigate(path)}>{value}</Button>
+            <Button size="lg" onClick={() => navigate(path)}>{value}</Button>
           </CardContent>
 
           <CardFooter>

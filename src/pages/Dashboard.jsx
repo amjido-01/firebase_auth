@@ -18,7 +18,7 @@ const Dashboard = () => {
         <div className="px-">
           <Card className="w-[330px] md:w-[380px]">
             <CardHeader>
-              <CardTitle>Profile</CardTitle>
+              <CardTitle>Dashboard</CardTitle>
               <CardDescription>
                 {currentUser && currentUser.email}
               </CardDescription>
