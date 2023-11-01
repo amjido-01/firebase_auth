@@ -75,7 +75,7 @@ export const EditProfile = () => {
           </Button>
         </DialogTrigger>
         <div className="px-8 ">
-          <DialogContent className="w-[330px] sm:w-[400px] md:max-w-[425px]">
+          <DialogContent className="w-[320px] sm:w-[400px] md:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>Edit profile</DialogTitle>
               <DialogDescription>
