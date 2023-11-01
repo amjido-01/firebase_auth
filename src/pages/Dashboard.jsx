@@ -16,7 +16,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen mx-auto px-8 flex items-center justify-center">
-        <div className="px- border-2 border-red-500">
+        <div className="px-">
           <Card className="w-[330px] md:w-[380px]">
             <CardHeader>
               <CardTitle>Profile</CardTitle>
