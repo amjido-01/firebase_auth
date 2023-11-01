@@ -19,6 +19,7 @@ export const EditProfile = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  // const [isOpen, setIsOpen] = useState(false)
   const { loading, setLoading, currentUser, updateemail, updatepassword } =
     useAuth();
     const navigate = useNavigate()
@@ -74,7 +75,7 @@ export const EditProfile = () => {
           </Button>
         </DialogTrigger>
         <div className="px-8 ">
-          <DialogContent className="w-[330px] sm:w-[400px] md:max-w-[425px] border-2 border-red-500">
+          <DialogContent className="w-[330px] sm:w-[400px] md:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>Edit profile</DialogTitle>
               <DialogDescription>
