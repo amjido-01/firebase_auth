@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { EditProfile } from "../components/ui/EditProfile";
 
 
 const Dashboard = () => {
@@ -28,9 +27,6 @@ const Dashboard = () => {
               <p>Card Content</p>
             </CardContent>
             <CardFooter className="">
-              <div className="w-full">
-                <EditProfile className="w-full" />
-              </div>
             </CardFooter>
           </Card>
         </div>

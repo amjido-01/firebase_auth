@@ -8,8 +8,9 @@ import { AuthProvider } from "./Auth/AuthContext";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 import ResetPassword from "./pages/ResetPassword";
 import { Header } from "./components/ui/Header";
-import {ThemeProvider } from "./components/ui/theme-provider"
-import {About} from "./pages/About"
+import { ThemeProvider } from "./components/ui/theme-provider"
+import { About } from "./pages/About"
+import { ModalProvider } from "./components/providers/modal-provider";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               </Route>
             </Routes>
           </div>
+            <ModalProvider />
         </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
