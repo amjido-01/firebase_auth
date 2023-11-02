@@ -14,6 +14,7 @@ import { ModalProvider } from "./components/providers/modal-provider";
 import { Profile } from "./pages/Profile";
 import { AccountSet } from "./pages/AccountSet";
 import { SignOut } from "./pages/SignOut";
+import Footer from "./components/ui/Footer";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
                 <Route exact path="/dashboard" element={<Dashboard />} />
               </Route>
             </Routes>
+            {/* <Footer /> */}
           </div>
           <ModalProvider />
         </AuthProvider>

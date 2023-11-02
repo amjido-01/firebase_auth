@@ -125,7 +125,7 @@ export const AccountSet = () => {
   ];
 
   return (
-    <div className="pt-20 w-[90%] md:w-[75%] mx-auto flex flex-col gap-8">
+    <div className="pt-20 w-[90%] h-screen md:w-[75%] mx-auto flex flex-col gap-8">
       {cards.map((card, index) => (
         <CustomCard
           key={index}

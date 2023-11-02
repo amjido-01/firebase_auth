@@ -43,7 +43,7 @@ const handleSignOut = async () => {
               {loading ? (
                 <Button size="lg" className="w-full mt-1" disabled>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Log Out
+                  Logging Out...
                 </Button>
               ) : (
                 <Button size="lg" onClick={handleSignOut} className="w-full">

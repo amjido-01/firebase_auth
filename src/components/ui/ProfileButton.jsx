@@ -36,7 +36,7 @@ export function ProfileButton() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <span className="text-xs ">{currentUser?.email}</span>
+        <span className="text-xs ml-2 ">{currentUser?.email}</span>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={() => navigate("/profile")}>

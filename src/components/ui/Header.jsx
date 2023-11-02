@@ -63,8 +63,8 @@ export const Header = () => {
           <div className="">
             <div className="">
               <Link to="/" className="site-title flex items-center">
-                {/* <img className="md:w-10 md:h-10" src={logo} alt="logo" /> */}
-                <span> ME </span>
+                <img className="md:w-10 md:h-10" src={logo} alt="logo" />
+                {/* <span> ME </span> */}
               </Link>
             </div>
           </div>

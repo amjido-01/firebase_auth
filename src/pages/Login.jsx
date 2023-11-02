@@ -10,6 +10,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Loader2 } from "lucide-react";
+import Footer from "../components/ui/Footer";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -181,6 +182,7 @@ const Login = () => {
           </Button>
         </div>
       </div>
+      {/* <Footer /> */}
     </div>
   );
 };
