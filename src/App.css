@@ -20,3 +20,10 @@
 .top {
   top: 11px !important;
 }
+
+.delete-bg {
+  background-color: hsl(357, 37%, 12%);
+}
+.delete-border {
+  border-color: hsl(357, 55%, 26%);
+}
